@@ -67,23 +67,31 @@ function guardar(){
 	 		var contenedor4 = document.createElement('div');
 	 		contenedor4.setAttribute('class', 'div2');
 	 		contenedor3.appendChild(contenedor4);
-	 		var contenido = document.createElement('p');
+	 		var contenido = document.createElement('textarea');
 	 		contenido.innerHTML=box2.value;
 	 		contenedor4.appendChild(contenido);
 	 		var insertar = contenedor2.insertBefore(contenedor4,contenedor3);
 	 		tarj++;
 	 		contenedor4.setAttribute('id',+tarj);
 	 		contenedor4.setAttribute('draggable','true');
+
 	 		contenedor4.ondragstart=function(e){
-	 			e.dataTransfer.setData('content',e.target.id);
+	 			e.dataTransfer.setData('text',this.id);
+	 		}
+	 		contenedor4.ondragenter=function(e){
+	 			
 	 		}
 	 		contenedor2.ondragover=function(e){
+	 			/*var clase =e.target.getAttribute('class');*/
+	 			/*if (clase=='div1') */
 	 			e.preventDefault();
+	 			/*return;*/
 	 		}
 	 		contenedor2.ondrop=function(e){
-	 			var id =e.dataTransfer.getData('content');
-	 			e.target.insertBefore(document.getElementById(id),e.target.childNode);
+	 			var id =e.dataTransfer.getData('text');
+	 			this.insertBefore(document.getElementById(id),this.childNode);
 	 		}
+
 	 		box2.value='';
 	 	}
 	
